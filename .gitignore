@@ -16,3 +16,7 @@ build
 .project
 
 .cache
+
+# Ignore Appium logs
+appium.log
+appium_error.log
