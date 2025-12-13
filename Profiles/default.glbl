@@ -4,17 +4,4 @@
    <name>default</name>
    <tag></tag>
    <defaultProfile>true</defaultProfile>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login'</initValue>
-      <name>BASE_URL</name>
-      <protected>false</protected>
-      <valueType>STRING</valueType>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>[('TR_BASE_URL') : '', ('TR_USERNAME') : '', ('TR_API_KEY') : '', ('TR_PROJECT_NAME') : '', ('TR_PLAN_ID') : '', ('TR_RUN_NAME') : '']</initValue>
-      <name>TESTRAIL_PROPERTIES</name>
-      <protected>false</protected>
-   </GlobalVariableEntity>
 </GlobalVariableEntities>

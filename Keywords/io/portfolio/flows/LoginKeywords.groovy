@@ -20,6 +20,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import internal.GlobalVariable
 import io.portfolio.core.BrowserKeywords
+import io.portfolio.core.SafeAction
 import io.portfolio.pages.DashboardPage
 import io.portfolio.pages.LoginPage
 
@@ -28,10 +29,10 @@ public class LoginKeywords {
 	 * Hanya melakukan login (tanpa open browser)
 	 */
 	static void login(String username, String password) {
-		WebUI.setText(LoginPage.username(), username)
-		WebUI.setText(LoginPage.password(), password)
-		WebUI.click(LoginPage.loginButton())
-		WebUI.verifyElementPresent(DashboardPage.menuDashboard(), 10)
+		SafeAction.sendKeys(LoginPage.username().testObject, username)
+		SafeAction.sendKeys(LoginPage.password().testObject, password)
+		SafeAction.click(LoginPage.loginButton().testObject)
+		SafeAction.waitVisibleOrFail(DashboardPage.menuDashboard().testObject)
 	}
 
 	/**

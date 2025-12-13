@@ -20,19 +20,20 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import internal.GlobalVariable
 import io.portfolio.core.ObjectFactory
+import io.portfolio.core.ObjectFactory.ObjectResult
 
 public class DashboardPage {
-	static menuDashboard() { ObjectFactory.by("menuDashboard", "xpath", "//span[text()='Dashboard']") }
-	static menuAdmin()     { ObjectFactory.by("menuAdmin", "xpath", "//span[text()='Admin']") }
-	static menuPIM()       { ObjectFactory.by("menuPIM", "xpath", "//span[text()='PIM']") }
-	static menuLeave()     { ObjectFactory.by("menuLeave", "xpath", "//span[text()='Leave']") }
-	static menuRecruitment(){ ObjectFactory.by("menuRecruitment","xpath","//span[text()='Recruitment']") }
-	static menuMyInfo()    { ObjectFactory.by("menuMyInfo", "xpath", "//span[text()='My Info']") }
-	static menuTime()      { ObjectFactory.by("menuTime", "xpath", "//span[text()='Time']") }
-	static menuMaintenance(){ ObjectFactory.by("menuMaintenance","xpath","//span[text()='Maintenance']") }
-	static menuClaim()     { ObjectFactory.by("menuClaim", "xpath", "//span[text()='Claim']") }
+	static ObjectResult menuDashboard() { ObjectFactory.testObject("menuDashboard", "xpath", "//span[text()='Dashboard']") }
+	static ObjectResult menuAdmin()     { ObjectFactory.testObject("menuAdmin", "xpath", "//span[text()='Admin']") }
+	static ObjectResult menuPIM()       { ObjectFactory.testObject("menuPIM", "xpath", "//span[text()='PIM']") }
+	static ObjectResult menuLeave()     { ObjectFactory.testObject("menuLeave", "xpath", "//span[text()='Leave']") }
+	static ObjectResult menuRecruitment(){ ObjectFactory.testObject("menuRecruitment","xpath","//span[text()='Recruitment']") }
+	static ObjectResult menuMyInfo()    { ObjectFactory.testObject("menuMyInfo", "xpath", "//span[text()='My Info']") }
+	static ObjectResult menuTime()      { ObjectFactory.testObject("menuTime", "xpath", "//span[text()='Time']") }
+	static ObjectResult menuMaintenance(){ ObjectFactory.testObject("menuMaintenance","xpath","//span[text()='Maintenance']") }
+	static ObjectResult menuClaim()     { ObjectFactory.testObject("menuClaim", "xpath", "//span[text()='Claim']") }
 
-	static userDropdown() {
-		ObjectFactory.by("userDropdown", "css", "p.oxd-userdropdown-name")
+	static ObjectResult userDropdown() {
+		ObjectFactory.testObject("userDropdown", "css", "p.oxd-userdropdown-name")
 	}
 }

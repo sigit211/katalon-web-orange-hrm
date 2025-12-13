@@ -1,4 +1,4 @@
-package io.portfolio.core
+package io.portfolio.constans
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -19,21 +19,17 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import internal.GlobalVariable
-import io.portfolio.constans.UrlConstants
 
-public class BrowserKeywords {
-	static void openLoginPage() {
-		WebUI.openBrowser('')
-		WebUI.maximizeWindow()
-		WebUI.navigateToUrl(UrlConstants.BASE_URL)
-	}
+public final class UrlConstants {
+	public static final String ENV = GlobalVariable.ENV
 
-	static void closeBrowser() {
-		try {
-			WebUI.closeBrowser()
-		} catch (Exception e) {
-			// fail-safe jika browser sudah tertutup
-			println "Browser sudah tertutup atau gagal ditutup: ${e.message}"
-		}
-	}
+    public static final String BASE_URL =				
+		ENV.equals("UAT")  ? "https://uat.orangehrm.com" : //contoh jika ada env UAT
+							"https://opensource-demo.orangehrmlive.com" //default env DEMO
+								
+    public static final String LOGIN = BASE_URL + "/web/index.php/auth/login"
+	public static final String DASHBOARD = BASE_URL + "/web/index.php/dashboard/index"
+	
+	private UrlConstants() {}
 }
+

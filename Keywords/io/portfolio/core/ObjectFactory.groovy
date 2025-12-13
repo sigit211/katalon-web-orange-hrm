@@ -22,9 +22,31 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable
 
 public class ObjectFactory {
-	static TestObject by(String name, String type, String value) {
-		TestObject to = new TestObject(name)
-		to.addProperty(type, ConditionType.EQUALS, value)
-		return to
+	static class ObjectResult {
+	    TestObject testObject
+	    String xpath
+	    String attribute
+	    String value
+	
+	    ObjectResult(Map args) {
+	        this.testObject = args.testObject
+	        this.xpath      = args.xpath
+	        this.attribute  = args.attribute
+	        this.value      = args.value
+	    }
 	}
+	
+	static ObjectResult testObject(String name, String attribute, String value) {
+	    TestObject to = new TestObject(name)
+	    to.addProperty(attribute, ConditionType.EQUALS, value)
+	
+	    String xpath = "//*[@${attribute}='${value}']"
+	
+	    return new ObjectResult(
+	        testObject: to,
+			xpath     : xpath,
+	        attribute : attribute,
+	        value     : value
+	    )
+	}	
 }

@@ -20,21 +20,22 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import internal.GlobalVariable
 import io.portfolio.core.ObjectFactory
+import io.portfolio.core.ObjectFactory.ObjectResult
 
 public class LoginPage {
-	static username() {
-		ObjectFactory.by("username", "xpath", "//input[@name='username']")
+	static ObjectResult username() {
+		ObjectFactory.testObject("username", "xpath", "//input[@name='username']")
 	}
 
-	static password() {
-		ObjectFactory.by("password", "xpath", "//input[@name='password']")
+	static ObjectResult password() {
+		ObjectFactory.testObject("password", "xpath", "//input[@name='password']")
 	}
 
-	static loginButton() {
-		ObjectFactory.by("loginButton", "xpath", "//button[@type='submit']")
+	static ObjectResult loginButton() {
+		ObjectFactory.testObject("loginButton", "xpath", "//button[@type='submit']")
 	}
 
-	static errorMessage() {
-		ObjectFactory.by("errorMessage", "css", "p.oxd-alert-content-text")
+	static ObjectResult errorMessage() {
+		ObjectFactory.testObject("errorMessage", "css", "p.oxd-alert-content-text")
 	}
 }

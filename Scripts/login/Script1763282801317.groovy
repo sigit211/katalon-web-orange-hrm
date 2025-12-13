@@ -15,6 +15,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable
+import io.portfolio.constans.UrlConstants
 import io.portfolio.core.BrowserKeywords
 import io.portfolio.core.VerifyKeywords
 import io.portfolio.flows.LoginKeywords
@@ -23,6 +24,6 @@ import org.openqa.selenium.Keys as Keys
 
 LoginKeywords.loginToApp("Admin", "admin123")
 
-VerifyKeywords.verifyUrl("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index")
+VerifyKeywords.verifyUrl(UrlConstants.DASHBOARD)
 
 BrowserKeywords.closeBrowser()
