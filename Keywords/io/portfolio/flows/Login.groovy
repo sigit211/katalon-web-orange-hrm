@@ -24,7 +24,7 @@ import io.portfolio.core.SafeAction
 import io.portfolio.pages.DashboardPage
 import io.portfolio.pages.LoginPage
 
-public class LoginKeywords {
+public class Login {
 	/**
 	 * Hanya melakukan login (tanpa open browser)
 	 */
