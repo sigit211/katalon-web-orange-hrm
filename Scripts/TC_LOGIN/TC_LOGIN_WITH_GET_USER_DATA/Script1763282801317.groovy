@@ -29,11 +29,9 @@ import org.openqa.selenium.Keys as Keys
 
 String testcaseName = GlobalVariable.SCREENSHOOT_PATH + "${testcaseName}"
 
-Map<String, String> userData = GlobalVariable.USER_DATA
-
 BrowserKeywords.openLoginPage()
 
-Login.loginWithUserData(userData.get("username"), Credential.decryptKatalon(userData.get("password")), testcaseName)
+Login.loginWithGetUserData(testcaseName)
 
 VerifyKeywords.verifyUrl(UrlConstants.DASHBOARD)
 

@@ -115,10 +115,10 @@ class SafeAction {
 	}
 
 	/* ================= SCREENSHOOT ================= */
-	static void takeScreenshotSafe(String fileName, 
-		int retry = DEFAULT_RETRY) {
+	static void takeScreenshotSafe(String fileName,
+			int retry = DEFAULT_RETRY) {
 		String fullPath = Paths.get(fileName).toAbsolutePath().toString()
-		
+
 		int attempt = 0
 		while (attempt < retry) {
 			try {
@@ -131,10 +131,10 @@ class SafeAction {
 				Thread.sleep(RETRY_INTERVAL_MS)
 			}
 		}
-	
+
 		KeywordUtil.logInfo("[SafeAction][SCREENSHOT] Giving up after $retry attempts ($fullPath)")
 	}
-		
+
 	/* ================= VERIFY (NO DIRECT FAIL) ================= */
 
 	static boolean verifyVisible(TestObject to,
@@ -205,4 +205,4 @@ class SafeAction {
 			WebUI.waitForElementClickable(to, timeout)
 		}
 	}
-}	
+}

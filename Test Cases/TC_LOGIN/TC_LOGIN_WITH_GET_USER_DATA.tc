@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_LOGIN_WITH_GET_USER_DATA</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>36c55e0b-38c2-4dcd-bf0e-81b6a159b241</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>df8fb08d-0bb2-4425-9e63-3300c66041b7</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>7fb8b6e2-bae7-4095-afed-0bb880a93a38</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Login With Get User Data'</defaultValue>
+      <description></description>
+      <id>df8fb08d-0bb2-4425-9e63-3300c66041b7</id>
+      <masked>false</masked>
+      <name>testcaseName</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>7fb8b6e2-bae7-4095-afed-0bb880a93a38</id>
+      <masked>false</masked>
+      <name>testcaseId</name>
+   </variable>
+</TestCaseEntity>

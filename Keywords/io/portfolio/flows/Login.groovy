@@ -21,27 +21,29 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable
 import io.portfolio.core.BrowserKeywords
 import io.portfolio.core.SafeAction
+import io.portfolio.core.StringUtil
 import io.portfolio.pages.DashboardPage
 import io.portfolio.pages.LoginPage
 
 public class Login {
-	/**
-	 * Hanya melakukan login (tanpa open browser)
-	 */
-	static void login(String username, String password, String testcaseName) {
+	static void loginWithUserData(String username, String password, String testcaseName) {
 		SafeAction.sendKeys(LoginPage.username().testObject, username)
 		SafeAction.sendKeys(LoginPage.password().testObject, password)
 		SafeAction.takeScreenshotSafe("$testcaseName/login pic-1.png")
 		SafeAction.click(LoginPage.loginButton().testObject)
 		SafeAction.waitVisibleOrFail(DashboardPage.menuDashboard().testObject)
-		SafeAction.takeScreenshotSafe("$testcaseName/login pic-2.png")	
+		SafeAction.takeScreenshotSafe("$testcaseName/login pic-2.png")
 	}
+	
+	static void loginWithGetUserData(String testcaseName) {
+		String getUsername = StringUtil.after(SafeAction.getText(LoginPage.demoUsernameText().testObject), ":")
+		String getPassword = StringUtil.after(SafeAction.getText(LoginPage.demoPasswordText().testObject), ":")
 
-	/**
-	 * Full login sequence: open login page + login
-	 */
-	static void loginToApp(String username, String password, String testcaseName) {
-		BrowserKeywords.openLoginPage()
-		login(username, password, testcaseName)
+		SafeAction.sendKeys(LoginPage.username().testObject, getUsername)
+		SafeAction.sendKeys(LoginPage.password().testObject, getPassword)
+		SafeAction.takeScreenshotSafe("$testcaseName/login pic-1.png")
+		SafeAction.click(LoginPage.loginButton().testObject)
+		SafeAction.waitVisibleOrFail(DashboardPage.menuDashboard().testObject)
+		SafeAction.takeScreenshotSafe("$testcaseName/login pic-2.png")
 	}
 }
