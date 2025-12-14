@@ -24,167 +24,167 @@ import internal.GlobalVariable
 
 class SafeAction {
 
-    /* ================= CONFIG ================= */
+	/* ================= CONFIG ================= */
 
-    static final int DEFAULT_TIMEOUT = GlobalVariable.DEFAULT_TIMEOUT
-    static final int DEFAULT_RETRY = GlobalVariable.DEFAULT_RETRY
-    static final int RETRY_INTERVAL_MS = GlobalVariable.RETRY_INTERVAL_MS
+	static final int DEFAULT_TIMEOUT = GlobalVariable.DEFAULT_TIMEOUT
+	static final int DEFAULT_RETRY = GlobalVariable.DEFAULT_RETRY
+	static final int RETRY_INTERVAL_MS = GlobalVariable.RETRY_INTERVAL_MS
 
-    /* ================= CORE RETRY ENGINE ================= */
+	/* ================= CORE RETRY ENGINE ================= */
 
-    private static void executeWithRetry(
-            String actionName,
-            TestObject to,
-            int retry,
-            Closure action) {
+	private static void executeWithRetry(
+			String actionName,
+			TestObject to,
+			int retry,
+			Closure action) {
 
-        int attempt = 0
-        Exception lastException = null
+		int attempt = 0
+		Exception lastException = null
 
-        while (attempt < retry) {
-            try {
-                action.call()
-                return
-            } catch (Exception e) {
-                attempt++
-                lastException = e
-                KeywordUtil.logInfo(
-                        "[SafeAction][$actionName] Retry $attempt/$retry - ${getObjectName(to)}"
-                )
+		while (attempt < retry) {
+			try {
+				action.call()
+				return
+			} catch (Exception e) {
+				attempt++
+				lastException = e
+				KeywordUtil.logInfo(
+						"[SafeAction][$actionName] Retry $attempt/$retry - ${getObjectName(to)}"
+						)
 
-                if (attempt >= retry) {
-                    WebUI.takeScreenshot(FailureHandling.OPTIONAL)
-                    throw new StepFailedException(
-                            "[SafeAction][$actionName] FAILED after $retry retries - ${getObjectName(to)}",
-                            e
-                    )
-                }
-                Thread.sleep(RETRY_INTERVAL_MS)
-            }
-        }
-    }
+				if (attempt >= retry) {
+					WebUI.takeScreenshot(FailureHandling.OPTIONAL)
+					throw new StepFailedException(
+					"[SafeAction][$actionName] FAILED after $retry retries - ${getObjectName(to)}",
+					e
+					)
+				}
+				Thread.sleep(RETRY_INTERVAL_MS)
+			}
+		}
+	}
 
-    private static String getObjectName(TestObject to) {
-        return to?.getObjectId() ?: "UnknownObject"
-    }
+	private static String getObjectName(TestObject to) {
+		return to?.getObjectId() ?: "UnknownObject"
+	}
 
-    /* ================= BASIC ACTIONS ================= */
+	/* ================= BASIC ACTIONS ================= */
 
-    static void click(TestObject to,
-                      int timeout = DEFAULT_TIMEOUT,
-                      int retry = DEFAULT_RETRY) {
+	static void click(TestObject to,
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
-        executeWithRetry("CLICK", to, retry) {
-            WebUI.waitForElementClickable(to, timeout)
-            WebUI.click(to)
-        }
-    }
+		executeWithRetry("CLICK", to, retry) {
+			WebUI.waitForElementClickable(to, timeout)
+			WebUI.click(to)
+		}
+	}
 
-    static void setText(TestObject to,
-                        String text,
-                        int timeout = DEFAULT_TIMEOUT,
-                        int retry = DEFAULT_RETRY) {
+	static void setText(TestObject to,
+			String text,
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
-        executeWithRetry("SET_TEXT", to, retry) {
-            WebUI.waitForElementVisible(to, timeout)
-            WebUI.clearText(to, FailureHandling.OPTIONAL)
-            WebUI.setText(to, text)
-        }
-    }
+		executeWithRetry("SET_TEXT", to, retry) {
+			WebUI.waitForElementVisible(to, timeout)
+			WebUI.clearText(to, FailureHandling.OPTIONAL)
+			WebUI.setText(to, text)
+		}
+	}
 
-    static void sendKeys(TestObject to,
-                         String text,
-                         int timeout = DEFAULT_TIMEOUT,
-                         int retry = DEFAULT_RETRY) {
+	static void sendKeys(TestObject to,
+			String text,
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
-        executeWithRetry("SEND_KEYS", to, retry) {
-            WebUI.waitForElementVisible(to, timeout)
-            WebUI.sendKeys(to, text)
-        }
-    }
+		executeWithRetry("SEND_KEYS", to, retry) {
+			WebUI.waitForElementVisible(to, timeout)
+			WebUI.sendKeys(to, text)
+		}
+	}
 
-    static String getText(TestObject to,
-                          int timeout = DEFAULT_TIMEOUT,
-                          int retry = DEFAULT_RETRY) {
+	static String getText(TestObject to,
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
-        String result = ""
+		String result = ""
 
-        executeWithRetry("GET_TEXT", to, retry) {
-            WebUI.waitForElementVisible(to, timeout)
-            result = WebUI.getText(to)
-        }
-        return result
-    }
+		executeWithRetry("GET_TEXT", to, retry) {
+			WebUI.waitForElementVisible(to, timeout)
+			result = WebUI.getText(to)
+		}
+		return result
+	}
 
-    /* ================= VERIFY (NO DIRECT FAIL) ================= */
+	/* ================= VERIFY (NO DIRECT FAIL) ================= */
 
-    static boolean verifyVisible(TestObject to,
-                                 int timeout = DEFAULT_TIMEOUT,
-                                 int retry = DEFAULT_RETRY) {
+	static boolean verifyVisible(TestObject to,
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
-        int attempt = 0
-        while (attempt < retry) {
-            try {
-                return WebUI.waitForElementVisible(to, timeout)
-            } catch (Exception e) {
-                attempt++
-                KeywordUtil.logInfo(
-                        "[SafeAction][VERIFY_VISIBLE] Retry $attempt/$retry - ${getObjectName(to)}"
-                )
-                Thread.sleep(RETRY_INTERVAL_MS)
-            }
-        }
-        return false
-    }
+		int attempt = 0
+		while (attempt < retry) {
+			try {
+				return WebUI.waitForElementVisible(to, timeout)
+			} catch (Exception e) {
+				attempt++
+				KeywordUtil.logInfo(
+						"[SafeAction][VERIFY_VISIBLE] Retry $attempt/$retry - ${getObjectName(to)}"
+						)
+				Thread.sleep(RETRY_INTERVAL_MS)
+			}
+		}
+		return false
+	}
 
-    static boolean verifyClickable(TestObject to,
-                                   int timeout = DEFAULT_TIMEOUT,
-                                   int retry = DEFAULT_RETRY) {
+	static boolean verifyClickable(TestObject to,
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
-        int attempt = 0
-        while (attempt < retry) {
-            try {
-                return WebUI.waitForElementClickable(to, timeout)
-            } catch (Exception e) {
-                attempt++
-                Thread.sleep(RETRY_INTERVAL_MS)
-            }
-        }
-        return false
-    }
+		int attempt = 0
+		while (attempt < retry) {
+			try {
+				return WebUI.waitForElementClickable(to, timeout)
+			} catch (Exception e) {
+				attempt++
+				Thread.sleep(RETRY_INTERVAL_MS)
+			}
+		}
+		return false
+	}
 
-    /* ================= WAIT ONLY ================= */
+	/* ================= WAIT ONLY ================= */
 
-    static void waitVisible(TestObject to,
-                            int timeout = DEFAULT_TIMEOUT,
-                            int retry = DEFAULT_RETRY) {
+	static void waitVisible(TestObject to,
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
-        executeWithRetry("WAIT_VISIBLE", to, retry) {
-            WebUI.waitForElementVisible(to, timeout)
-        }
-    }
+		executeWithRetry("WAIT_VISIBLE", to, retry) {
+			WebUI.waitForElementVisible(to, timeout)
+		}
+	}
 
 	static void waitVisibleOrFail(TestObject to,
-		int timeout = DEFAULT_TIMEOUT,
-		int retry = DEFAULT_RETRY) {
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
 		executeWithRetry("WAIT_VISIBLE_OR_FAIL", to, retry) {
 			boolean visible = WebUI.waitForElementVisible(to, timeout)
 			if (!visible) {
 				throw new StepFailedException(
-					"Element tidak visible setelah ${timeout}s"
+				"Element tidak visible setelah ${timeout}s"
 				)
 			}
 		}
 	}
 
-    static void waitClickable(TestObject to,
-                              int timeout = DEFAULT_TIMEOUT,
-                              int retry = DEFAULT_RETRY) {
+	static void waitClickable(TestObject to,
+			int timeout = DEFAULT_TIMEOUT,
+			int retry = DEFAULT_RETRY) {
 
-        executeWithRetry("WAIT_CLICKABLE", to, retry) {
-            WebUI.waitForElementClickable(to, timeout)
-        }
-    }
+		executeWithRetry("WAIT_CLICKABLE", to, retry) {
+			WebUI.waitForElementClickable(to, timeout)
+		}
+	}
 }
 
