@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_LOGIN_WITH_USER_DATA</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>2060ff25-a2e2-4139-9e30-24ed951ccca6</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>9a0d884b-083d-4730-8330-ebb3a187f83a</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>fc8165c9-1be2-4c24-9439-ec4646b806ab</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Login With User Data'</defaultValue>
+      <description></description>
+      <id>9a0d884b-083d-4730-8330-ebb3a187f83a</id>
+      <masked>false</masked>
+      <name>testcaseName</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>fc8165c9-1be2-4c24-9439-ec4646b806ab</id>
+      <masked>false</masked>
+      <name>testcaseId</name>
+   </variable>
+</TestCaseEntity>

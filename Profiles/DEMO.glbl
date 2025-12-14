@@ -13,6 +13,13 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Screenshoot/'</initValue>
+      <name>SCREENSHOOT_PATH</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>[('username') : 'Admin', ('password') : 'hUKwJTbofgPU9eVlw/CnDQ==']</initValue>
       <name>USER_DATA</name>
       <protected>false</protected>

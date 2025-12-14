@@ -6,6 +6,9 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import java.nio.file.Files
+import java.nio.file.Paths
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -32,12 +35,7 @@ class SafeAction {
 
 	/* ================= CORE RETRY ENGINE ================= */
 
-	private static void executeWithRetry(
-			String actionName,
-			TestObject to,
-			int retry,
-			Closure action) {
-
+	private static void executeWithRetry(String actionName, TestObject to, int retry, Closure action) {
 		int attempt = 0
 		Exception lastException = null
 
@@ -116,6 +114,27 @@ class SafeAction {
 		return result
 	}
 
+	/* ================= SCREENSHOOT ================= */
+	static void takeScreenshotSafe(String fileName, 
+		int retry = DEFAULT_RETRY) {
+		String fullPath = Paths.get(fileName).toAbsolutePath().toString()
+		
+		int attempt = 0
+		while (attempt < retry) {
+			try {
+				WebUI.takeScreenshot(fullPath, FailureHandling.OPTIONAL)
+				KeywordUtil.logInfo("[SafeAction][SCREENSHOT] Success ($fullPath) attempt ${attempt + 1}/$retry")
+				return
+			} catch (Exception e) {
+				attempt++
+				KeywordUtil.logInfo("[SafeAction][SCREENSHOT] Failed ($fullPath) attempt $attempt/$retry : ${e.message}")
+				Thread.sleep(RETRY_INTERVAL_MS)
+			}
+		}
+	
+		KeywordUtil.logInfo("[SafeAction][SCREENSHOT] Giving up after $retry attempts ($fullPath)")
+	}
+		
 	/* ================= VERIFY (NO DIRECT FAIL) ================= */
 
 	static boolean verifyVisible(TestObject to,
@@ -186,5 +205,4 @@ class SafeAction {
 			WebUI.waitForElementClickable(to, timeout)
 		}
 	}
-}
-
+}	

@@ -28,18 +28,20 @@ public class Login {
 	/**
 	 * Hanya melakukan login (tanpa open browser)
 	 */
-	static void login(String username, String password) {
+	static void login(String username, String password, String testcaseName) {
 		SafeAction.sendKeys(LoginPage.username().testObject, username)
 		SafeAction.sendKeys(LoginPage.password().testObject, password)
+		SafeAction.takeScreenshotSafe("$testcaseName/login pic-1.png")
 		SafeAction.click(LoginPage.loginButton().testObject)
 		SafeAction.waitVisibleOrFail(DashboardPage.menuDashboard().testObject)
+		SafeAction.takeScreenshotSafe("$testcaseName/login pic-2.png")	
 	}
 
 	/**
 	 * Full login sequence: open login page + login
 	 */
-	static void loginToApp(String username, String password) {
+	static void loginToApp(String username, String password, String testcaseName) {
 		BrowserKeywords.openLoginPage()
-		login(username, password)
+		login(username, password, testcaseName)
 	}
 }

@@ -3,6 +3,10 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import java.nio.file.Files
+import java.nio.file.Paths
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -23,8 +27,11 @@ import io.portfolio.flows.Login
 
 import org.openqa.selenium.Keys as Keys
 
+String testcaseName = GlobalVariable.SCREENSHOOT_PATH + "${testcaseName}"
+
 Map<String, String> userData = GlobalVariable.USER_DATA
-Login.loginToApp(userData.get("username"), Credential.decryptKatalon(userData.get("password")))
+
+Login.loginToApp(userData.get("username"), Credential.decryptKatalon(userData.get("password")), testcaseName)
 
 VerifyKeywords.verifyUrl(UrlConstants.DASHBOARD)
 
