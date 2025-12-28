@@ -23,13 +23,13 @@ import internal.GlobalVariable
 public final class UrlConstants {
 	public static final String ENV = GlobalVariable.ENV
 
-    public static final String BASE_URL =				
-		ENV.equals("UAT")  ? "https://uat.orangehrm.com" : //contoh jika ada env UAT
-							"https://opensource-demo.orangehrmlive.com" //default env DEMO
-								
-    public static final String LOGIN = BASE_URL + "/web/index.php/auth/login"
+	public static final String BASE_URL =
+	ENV.equals("UAT")  ? "https://uat.orangehrm.com" : //contoh jika ada env UAT
+	"https://opensource-demo.orangehrmlive.com" //default env DEMO
+
+	public static final String LOGIN = BASE_URL + "/web/index.php/auth/login"
 	public static final String DASHBOARD = BASE_URL + "/web/index.php/dashboard/index"
-	
+
 	private UrlConstants() {}
 }
 

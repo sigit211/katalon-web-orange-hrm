@@ -35,10 +35,6 @@ public class LoginPage {
 		ObjectFactory.testObject("loginButton", "xpath", "//button[@type='submit']")
 	}
 
-	static ObjectResult errorMessage() {
-		ObjectFactory.testObject("errorMessage", "css", "p.oxd-alert-content-text")
-	}
-
 	static ObjectResult demoUsernameText() {
 		ObjectFactory.testObject("demoUsernameText", "xpath", "//div[contains(@class,'orangehrm-demo-credentials')]/p[1]")
 	}
